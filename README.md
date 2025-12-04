@@ -126,8 +126,8 @@ All core features have been tested and verified:
 ## 🎓 Course Information
 
 **Course**: Game Development  
-**Institution**: [Your University/College]  
-**Instructor**: [Professor Name]  
+**Institution**: Conestoga college  
+**Instructor**: Tenzin Zampa
 **Semester**: Fall 2025  
 **Project Weight**: 30% of final grade
 
@@ -135,9 +135,17 @@ All core features have been tested and verified:
 
 ## 👨‍💻 Author
 
-**[Your Name]**  
-Student ID: [Your ID]  
-Email: [Your Email]
+👥 Authors / Team Members
+
+Dhruv Jivani
+
+Jeel Patel
+
+Isha Patel
+
+Aayushi Ravalji
+
+Dilraj Singh
 
 ---
 
@@ -157,55 +165,3 @@ This project is created for educational purposes as part of a university course.
 
 **Last Updated**: December 3, 2025
 ```
-
-3. **Edit** the template:
-   - Replace `[Your Name]`, `[Your ID]`, `[Your Email]`
-   - Replace `[Your University/College]` and `[Professor Name]`
-   - Update dates if needed
-
-4. **Save As**:
-   - File name: `README.md`
-   - Save as type: All Files
-   - Location: Your Unity project root folder
-
----
-
-## Step 4: Upload to GitHub using GitHub Desktop
-
-### 4.1 Add Repository to GitHub Desktop
-
-1. Open **GitHub Desktop**
-2. **File** → **Add Local Repository**
-3. Click **Choose...** button
-4. Navigate to your Unity project folder (CoinRush_FinalProject)
-5. Click **Select Folder**
-6. If it says "This directory does not appear to be a Git repository":
-   - Click **"create a repository"** link
-   - Click **Create Repository**
-
-### 4.2 Make Your First Commit
-
-1. In GitHub Desktop, you'll see all your files listed
-2. **Make sure these are INCLUDED** (checked):
-   - ✅ Assets folder
-   - ✅ ProjectSettings folder
-   - ✅ .gitignore file
-   - ✅ README.md file
-
-3. **Make sure these are NOT included** (they should be grayed out because of .gitignore):
-   - ❌ Library folder
-   - ❌ Temp folder
-   - ❌ Obj folder
-   - ❌ .vs folder
-   - ❌ .csproj and .sln files
-
-4. At the bottom left:
-   - **Summary**: `Initial commit - Core game mechanics`
-   - **Description** (optional): 
-```
-   - Added player movement and jumping
-   - Implemented coin collection system
-   - Created score tracking
-   - Added lives system and respawning
-   - Built main menu and game over screen
-   - Added screen boundaries
