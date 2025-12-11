@@ -2,83 +2,106 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // ------------------------------
+    // Movement Settings
+    // ------------------------------
     [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpForce = 17f;
+    [SerializeField] private float moveSpeed = 5f;   // Horizontal movement speed
+    [SerializeField] private float jumpForce = 17f;  // Vertical jump force
 
+    // ------------------------------
+    // Ground Check Settings
+    // ------------------------------
     [Header("Ground Check")]
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckRadius = 0.2f;
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform groundCheck;  // Point under player to detect ground
+    [SerializeField] private float groundCheckRadius = 0.2f; // Radius of ground detection circle
+    [SerializeField] private LayerMask groundLayer;  // Which layer counts as ground
 
+    // ------------------------------
+    // Health System
+    // ------------------------------
     [Header("Health Settings")]
-    [SerializeField] private int maxHealth = 3;
+    [SerializeField] private int maxHealth = 3;      // Max health of the player
 
-    private Rigidbody2D rb;
-    private bool isGrounded;
-    private float moveInput;
-    private int currentHealth;
-    private bool isInvincible = false;
-    private float invincibilityTime = 1f;
-    private float invincibilityTimer = 0f;
-    private SpriteRenderer spriteRenderer;
-    private AudioSource jumpAudioSource;
-    private AudioSource damageAudioSource;
+    private int currentHealth;                       // Current player health
+    private bool isInvincible = false;               // Prevents taking damage repeatedly
+    private float invincibilityTime = 1f;            // Duration of invincibility after damage
+    private float invincibilityTimer = 0f;           // Timer countdown
 
+    // ------------------------------
+    // Cached Components
+    // ------------------------------
+    private Rigidbody2D rb;                          // Player physics body
+    private SpriteRenderer spriteRenderer;           // Player sprite for flipping/flashing
+    private AudioSource jumpAudioSource;             // Jump sound
+    private AudioSource damageAudioSource;           // Damage sound
+
+    // Input & State
+    private bool isGrounded;                         // Is the player touching the ground?
+    private float moveInput;                         // Left/right input (-1, 0, or 1)
+
+    // ------------------------------
+    // Initialization
+    // ------------------------------
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Get both audio sources
+        // Get audio sources from player (0 = jump, 1 = damage)
         AudioSource[] audioSources = GetComponents<AudioSource>();
         if (audioSources.Length >= 1) jumpAudioSource = audioSources[0];
         if (audioSources.Length >= 2) damageAudioSource = audioSources[1];
 
         currentHealth = maxHealth;
 
-        // Update UI health
+        // Update health UI at the start
         if (GameManager.Instance != null)
         {
             GameManager.Instance.UpdateHealth(currentHealth, maxHealth);
         }
     }
 
+    // ------------------------------
+    // Handle Input & Gameplay Logic
+    // ------------------------------
     void Update()
     {
-        // Get horizontal input (A/D or Left/Right arrows)
+        // Get horizontal movement input
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        // Check if player is on ground
+        // Detect ground using a small circle under the player
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // Jump
+        // Jump only when grounded
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
-            // Play jump sound
+            // Play jump sound (only if SFX is not muted)
             if (jumpAudioSource != null && jumpAudioSource.clip != null)
             {
-                jumpAudioSource.Play();
+                if (AudioManager.Instance == null || !AudioManager.Instance.isSfxMuted)
+                    jumpAudioSource.Play();
             }
         }
 
-        // Handle invincibility timer
+        // Handle temporary invincibility after being damaged
         if (isInvincible)
         {
             invincibilityTimer -= Time.deltaTime;
 
-            // Flashing effect
+            // Flashing effect (changes transparency)
             float alpha = Mathf.PingPong(Time.time * 10f, 1f);
             Color color = spriteRenderer.color;
             color.a = alpha;
             spriteRenderer.color = color;
 
+            // When invincibility ends, reset appearance
             if (invincibilityTimer <= 0f)
             {
                 isInvincible = false;
-                // Reset color to full opacity
+
                 Color resetColor = spriteRenderer.color;
                 resetColor.a = 1f;
                 spriteRenderer.color = resetColor;
@@ -86,42 +109,53 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // ------------------------------
+    // Physics-Based Movement
+    // ------------------------------
     void FixedUpdate()
     {
-        // Move player
+        // Apply horizontal velocity
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
-        // Flip sprite based on movement direction
+        // Flip sprite direction depending on movement
         if (moveInput > 0)
         {
-            // Moving right - face right
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = false; // Facing right
         }
         else if (moveInput < 0)
         {
-            // Moving left - face left  
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = true;  // Facing left
         }
     }
 
+    // ------------------------------
+    // Collision Handling
+    // ------------------------------
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision with: " + collision.gameObject.name + " | Tag: " + collision.gameObject.tag + " | Invincible: " + isInvincible);
+        Debug.Log("Collision with: " + collision.gameObject.name +
+                  " | Tag: " + collision.gameObject.tag +
+                  " | Invincible: " + isInvincible);
 
+        // Take damage if touching an enemy and not invincible
         if (collision.gameObject.CompareTag("Enemy") && !isInvincible)
         {
             TakeDamage(1);
         }
     }
 
+    // ------------------------------
+    // Apply Damage to Player
+    // ------------------------------
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
-        // Play damage sound
+        // Play damage sound (if SFX not muted)
         if (damageAudioSource != null && damageAudioSource.clip != null)
         {
-            damageAudioSource.Play();
+            if (AudioManager.Instance == null || !AudioManager.Instance.isSfxMuted)
+                damageAudioSource.Play();
         }
 
         // Update UI
@@ -132,20 +166,23 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("Player Health: " + currentHealth + "/" + maxHealth);
 
+        // If health is 0 → Game Over
         if (currentHealth <= 0)
         {
-            // Game Over
             GameManager.Instance.GameOver();
         }
         else
         {
-            // Activate invincibility
+            // Otherwise become temporarily invincible to avoid instant death
             isInvincible = true;
             invincibilityTimer = invincibilityTime;
         }
     }
 
-    // Visualize ground check in editor
+    // ------------------------------
+    // Visual Helper in Editor
+    // Draws the ground check circle in Scene View
+    // ------------------------------
     void OnDrawGizmos()
     {
         if (groundCheck != null)
