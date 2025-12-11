@@ -1,0 +1,113 @@
+# ---------------------------------------------------------
+# UNITY PROJECT .GITIGNORE (Enhanced / Extended Version)
+# ---------------------------------------------------------
+
+# --- Standard Unity Folders ---
+/Library/
+/Temp/
+/Obj/
+/Build/
+/Builds/
+/Logs/
+/UserSettings/
+
+# --- Asset Store & Unity Package Cache ---
+/Assets/AssetStoreTools*
+/Assets/Plugins/Editor/JetBrains*
+/Packages/manifest.temp.json
+/Packages/packages-lock.temp.json
+
+# --- Collab / Plastic SCM ---
+/Collab/
+/PlasticSCM/
+/. plastic/
+/.plastic.workspace
+/.plasticide/
+/plastic-temp/
+
+# --- Unusual But Safe to Ignore ---
+# Unity crash reports
+CrashReport*
+*.dmp
+*.gsn
+
+# Unity auto-compiled shader caches
+*.shadercache
+*.cache
+*.cginc.meta
+ShaderCache/
+
+# Script Assemblies
+*.mdb
+*.pdb
+*.db
+
+# Scene backup files
+*.unity~ 
+*.prefab~
+
+# Terrain heightmap backups
+*.raw.meta
+
+# Build pipeline leftover
+*.apk.meta
+*.aab.meta
+*.unitypackage
+*.unitypackage.meta
+
+# --- IDE / Editor / Tools (enhanced) ---
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+/*.sln
+/*.csproj
+/*.unityproj
+/*.pidb
+/*.svd
+/*.user
+/*.userprefs
+*.DotSettings
+
+# Rider performance logs
+/.idea/.idea.Unity/.idea/log/
+
+# VS Code Workspace
+*.code-workspace
+
+# --- OS-Level Trash Files ---
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# --- Optional: Keep these in Git (important!) ---
+!Assets/
+!ProjectSettings/
+!Packages/
+
+# --- VERY UNUSUAL EXCLUDES ---
+# Git LFS pointer backup issues
+*.lfsconfig
+*.lfs.tmp
+
+# Memory snapshot dumps
+*.memsnap
+*.snap
+
+# Old Unity analytics & timeline cache
+AnalyticsData/
+TimelineCache/
+
+# ProBuilder auto backups
+ProBuilderData/
+
+# Collaborate hidden metadata
+.collabignore
