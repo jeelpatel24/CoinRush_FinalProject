@@ -99,8 +99,6 @@ public class GameManager : MonoBehaviour
         // Hide win/lose screens at the start of the level
         if (winPanel) winPanel.SetActive(false);
         if (gameOverPanel) gameOverPanel.SetActive(false);
-
-        Debug.Log("GameManager Started!");
     }
 
     // ------------------------------
@@ -117,8 +115,6 @@ public class GameManager : MonoBehaviour
         crystalsCollected++;      // Count crystal collection
 
         UpdateUI();               // Update UI labels
-
-        Debug.Log("Score: " + score + " | Crystals: " + crystalsCollected + "/" + totalCrystals);
     }
 
     // ------------------------------
@@ -146,13 +142,12 @@ public class GameManager : MonoBehaviour
     {
         if (healthText)
         {
-            // Build a string of hearts (♥) depending on current health
+            // Optimization: Use switch or StringBuilder for repeated updates
             string hearts = "";
             for (int i = 0; i < currentHealth; i++)
             {
                 hearts += "♥ ";
             }
-
             healthText.text = "Health: " + hearts;
         }
     }
@@ -168,8 +163,6 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;           // Pause the game
         if (winPanel) winPanel.SetActive(true);
-
-        Debug.Log("YOU WIN!");
     }
 
     // ------------------------------
@@ -183,8 +176,6 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;           // Pause everything
         if (gameOverPanel) gameOverPanel.SetActive(true);
-
-        Debug.Log("GAME OVER!");
     }
 
     // ------------------------------

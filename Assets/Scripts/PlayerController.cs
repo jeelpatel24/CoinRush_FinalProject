@@ -91,11 +91,14 @@ public class PlayerController : MonoBehaviour
         {
             invincibilityTimer -= Time.deltaTime;
 
-            // Flashing effect (changes transparency)
-            float alpha = Mathf.PingPong(Time.time * 10f, 1f);
-            Color color = spriteRenderer.color;
-            color.a = alpha;
-            spriteRenderer.color = color;
+            // Flashing effect (changes transparency) - only update if visible
+            if (invincibilityTimer > 0f)
+            {
+                float alpha = Mathf.PingPong(Time.time * 10f, 1f);
+                Color color = spriteRenderer.color;
+                color.a = alpha;
+                spriteRenderer.color = color;
+            }
 
             // When invincibility ends, reset appearance
             if (invincibilityTimer <= 0f)
@@ -133,10 +136,6 @@ public class PlayerController : MonoBehaviour
     // ------------------------------
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision with: " + collision.gameObject.name +
-                  " | Tag: " + collision.gameObject.tag +
-                  " | Invincible: " + isInvincible);
-
         // Take damage if touching an enemy and not invincible
         if (collision.gameObject.CompareTag("Enemy") && !isInvincible)
         {
@@ -163,8 +162,6 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.UpdateHealth(currentHealth, maxHealth);
         }
-
-        Debug.Log("Player Health: " + currentHealth + "/" + maxHealth);
 
         // If health is 0 → Game Over
         if (currentHealth <= 0)

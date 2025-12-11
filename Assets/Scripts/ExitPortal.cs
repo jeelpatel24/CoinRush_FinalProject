@@ -94,8 +94,6 @@ public class ExitPortal : MonoBehaviour
             portalColor.a = 1f;    // Fully opaque when active
             spriteRenderer.color = portalColor;
         }
-
-        Debug.Log("Portal is now active! Player can enter to win!");
     }
 
     // ------------------------------
@@ -108,22 +106,13 @@ public class ExitPortal : MonoBehaviour
     /// <param name="other">The collider that entered the trigger.</param>
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Portal collision with: " + other.gameObject.name + " | Active: " + isActive);
-
         // Only respond to the player collider
         if (other.CompareTag("Player"))
         {
             if (isActive)
             {
                 // Player entered an active portal → trigger level win
-                Debug.Log("Player entered active portal - triggering win!");
                 GameManager.Instance.WinGame();
-            }
-            else
-            {
-                // Portal is not active yet — remind player to collect crystals first
-                Debug.Log("Collect all crystals first! (" +
-                    GameManager.Instance.GetCrystalsCollected() + "/" + requiredCrystals + ")");
             }
         }
     }
