@@ -1,127 +1,92 @@
-# 🎮 Coin Rush - Unity Final Project
+# CoinRush
 
-## 📖 Game Description
-Coin Rush is a 2D platformer where players control a character to collect coins and reach the finish flag while avoiding obstacles.
+CoinRush is a 2D Unity arcade-style game where the player collects coins while avoiding obstacles and enemies. This repository contains the Unity project, assets, scenes, and settings required to open, run, and build the game.
 
-**Genre**: 2D Platformer  
-**Platform**: Windows PC (Android & WebGL coming soon)  
-**Engine**: Unity 6  
-**Language**: C#
+## Quick demo
+- Open the Unity project in a compatible Unity Editor version (see Installation).
+- Open the main scene from Scenes/ (see Project Structure).
+- Press Play to start testing locally.
 
----
+## Highlights
+- 2D arcade gameplay: collect coins, avoid hazards.
+- Pixel art assets and animations included.
+- Unity scene(s) and ProjectSettings configured.
 
-## ✨ Features
+## Features
+- Collectible coins and scoring system.
+- Player movement and animations.
+- Basic enemy obstacles and collision logic.
+- UI elements for score and restart.
 
-### Part 1 (Completed)
-- ✅ Player movement and jumping
-- ✅ Coin collection system
-- ✅ Score tracking
-- ✅ Lives system (3 lives)
-- ✅ Death zones and respawning
-- ✅ Win and Game Over screens
-- ✅ Main menu
-- ✅ Screen boundaries
-- ✅ Windows build
+## Zip distribution contents
+When you distribute the game as a ZIP (for handouts, classroom submission, or builds), include these top-level files and folders:
 
-### Part 2 (In Progress)
-- 🚧 Multiple levels
-- 🚧 Moving enemies
-- 🚧 Sound effects and music
-- 🚧 Power-ups
-- 🚧 Timer system
-- 🚧 Particle effects
+- CoinRush.zip
+  - README.md (this file)
+  - LICENSE (project license)
+  - Build/ (contains exported builds for target platforms, e.g., Windows, macOS)
+  - Docs/ (documentation files — this repo's docs/ folder)
+  - Assets/ (only if distributing the full Unity project; otherwise include source art under Licenses/ if required)
+  - ProjectSettings/ (if distributing the full Unity project)
+  - Scenes/ (if distributing the full Unity project)
+  - Source/ (optional: extracted important source scripts if you want to include them separately)
+  - ThirdPartyLicenses.md (list of asset licenses)
 
----
+Tip: If you're shipping the built game only, include only Build/, README.md, LICENSE, and ThirdPartyLicenses.md in the ZIP.
 
-## 🎮 How to Play
+## Installation (editor & runtime)
+1. Install Unity Editor (recommended versions: 2020.3 LTS or 2021.3 LTS). Exact version used is often noted in ProjectSettings/ProjectVersion.txt.
+2. Clone or extract the repository:
+   - git clone https://github.com/jeelpatel24/CoinRush_FinalProject.git
+   - or extract the ZIP that contains the project root (Assets, ProjectSettings, Packages).
+3. Open Unity Hub → Add → select the project root folder.
+4. Open the project and then open the main scene from Scenes/ to run in the Editor.
 
-### Controls
-- **A / Left Arrow**: Move Left
-- **D / Right Arrow**: Move Right
-- **Space**: Jump
-- **Escape**: Pause (Part 2)
+## How to build & prepare ZIP (short)
+- In Unity Editor: File → Build Settings → choose platform → Build.
+- Place generated builds into Build/ and include README.md, LICENSE, and ThirdPartyLicenses.md in the ZIP.
+- For reproducible builds include a small BUILD_INFO.txt describing Unity version and build date.
 
-### Objective
-Collect all coins and reach the red flag to win!
+More detailed build/package steps: see Docs/BUILD_AND_ZIP.md
 
----
+## Controls
+- Keyboard (default):
+  - Move left/right: A / D or ← / →
+  - Jump: Space or W / ↑
+  - Pause / Resume: Esc
+  - Restart: R
+See Docs/CONTROLS.md for exact mapping and controller notes.
 
-## 🚀 How to Run
+## Project Structure
+- Assets/ — Unity assets and scripts
+- Scenes/ — Unity scenes (main menu, gameplay)
+- ProjectSettings/ — Unity project settings
+- Animations/, 2D Dungeon PixelArt Tileset/ — art & tiles
+- Docs/ — additional documentation (this distribution)
+See Docs/ARCHITECTURE.md for a brief explanation of main scripts and important scene objects.
 
-### Option 1: Play the Build
-1. Download the latest release
-2. Extract the ZIP file
-3. Run `CoinRush.exe`
+## Contributing
+Contributions are welcome. Please follow the contributing guide in Docs/CONTRIBUTING.md. Typical workflow:
+1. Fork
+2. Create a feature branch
+3. Add changes and tests
+4. Open a pull request with a description of changes
 
-### Option 2: Open in Unity
-1. Install Unity Hub and Unity 6
-2. Clone this repository
-3. Open project in Unity Hub
-4. Open `MainMenu` or `Level1` scene
-5. Click Play button
+## Known issues / TODO
+- Optimization required for large scenes.
+- Add mobile touch controls.
+- More enemy types and level progression.
 
----
+## Asset licenses & credits
+- Pixel art and sprites: See Docs/ASSETS_LICENSES.md for details and attribution.
+- Open-source packages (if any): list in ThirdPartyLicenses.md
 
-## 📁 Project Structure
-```
-CoinRush_FinalProject/
-├── Assets/
-│   ├── Scenes/
-│   │   ├── MainMenu.unity
-│   │   └── Level1.unity
-│   ├── Scripts/
-│   │   ├── PlayerController.cs
-│   │   ├── GameManager.cs
-│   │   ├── MenuManager.cs
-│   │   ├── ScoreManager.cs
-│   │   ├── DeathZone.cs
-│   │   ├── EnemyPatrol.cs
-│   │   ├── PowerUp.cs
-│   │   ├── AudioManager.cs
-│   │   └── PauseManager.cs
-│   └── Sounds/ (Part 2)
-├── Builds/
-│   └── WindowsBuild/
-└── README.md
-```
+## Contact
+Project owner: jeelpatel24 (GitHub)
+Repository: https://github.com/jeelpatel24/CoinRush_FinalProject
 
----
-
-## 🧪 Testing
-
-All core features have been tested and verified:
-- ✅ Player movement and jumping
-- ✅ Coin collection and scoring
-- ✅ Lives system and respawning
-- ✅ Win/lose conditions
-- ✅ UI updates
-- ✅ Build stability
-
----
-
-## 💻 Technical Details
-
-**Unity Version**: Unity 6 (6000.0.X)  
-**Scripting Backend**: Mono  
-**API Compatibility**: .NET Standard 2.1  
-**Target Platform**: Windows (x86_64)
-
----
-
-## 📝 Development Log
-
-### December 3, 2025
-- Created basic player controller
-- Implemented coin collection
-- Added score system
-
-### December 4, 2025
-- Added main menu
-- Implemented lives system
-- Created game over screen
-- Added screen boundaries
-
----
+## License
+Add your chosen license (MIT, CC BY, etc.) as a LICENSE file at repository root.
 
 ## 🎓 Course Information
 
