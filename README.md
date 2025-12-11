@@ -113,7 +113,7 @@ Main Menu → Select Level → Collect Crystals → Unlock Portal → Reach Exit
 # 🖼️ **Game Screenshots**
 
 <div style="display: flex; gap: 20px; justify-content: center;">
-  <img src="Assets/images/scene1.png" width="45%" />
+  <img src="Assets/images/Scene1.png" width="45%" />
   <img src="Assets/images/gameover.png" width="45%" />
 </div>
 
