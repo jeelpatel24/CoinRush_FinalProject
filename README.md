@@ -161,7 +161,3 @@ This project is created for educational purposes as part of a university course.
 - Course instructor for guidance
 - Classmates for feedback and testing
 
----
-
-**Last Updated**: December 3, 2025
-```
